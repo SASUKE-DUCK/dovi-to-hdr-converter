@@ -39,7 +39,7 @@ Dolby Vision is a high dynamic range (HDR) format that provides an exceptional v
 To convert a Dolby Vision video to HDR10 with an output bitrate of 8000 kbps:
 
 ```
-python DoVi.py -i my_dolby_vision_video.mp4 -hdr hdr10 --bitrate 8000k
+python DoVi.py -i my_dolby_vision_video.mp4 -hdr hdr10 --bitrate 8000
 ```
 
 Enjoy your Dolby Vision videos on a wide range of devices and screens!
