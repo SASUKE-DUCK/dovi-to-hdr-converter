@@ -52,7 +52,7 @@ dv_to_hdr10 = [
     "-filter_hw_device", "vulkan",
     "-i", input_file,
     "-vf",
-    "hwupload,libplacebo=peak_detect=false:colorspace=9:color_primaries=9:color_trc=16:range=tv:format=yuv420p10le,hwdownload,format=yuv420p10le",
+    "hwupload,libplacebo=peak_detect=false:colorspace=9:color_primaries=9:color_trc=16:range=tv:format=yuv420p10le,hwdownload,format=yuv420p10le"
     "-c:v", "libx265",
     "-c:a", "copy",
     '-map_chapters', '-1',
@@ -64,7 +64,6 @@ dv_to_hdr10 = [
     f"repeat-headers=1:sar=1:hrd=1:aud=1:open-gop=0:hdr10=1:sao=0:rect=0:cutree=0:deblock=-3-3:strong-intra-smoothing=0:chromaloc=2:aq-mode=1:vbv-maxrate=160000:vbv-bufsize=160000:max-luma=1023:max-cll=0,0:master-display=G(8500,39850)B(6550,23000)R(35400,15650)WP(15635,16450)L(10000000,1)WP(15635,16450)L(1000000,100%)",
     output_path + ".mp4"
 ]
-
 
 dv_to_sdr = [
     ffmpegexe,
@@ -98,8 +97,9 @@ dv_to_hlg = [
     "-filter_hw_device", "vulkan",
     "-i", input_file,
     "-vf",
-    "hwupload,libplacebo=iw:ih:format=yuv420p10le:colorspace=bt2020nc:color_primaries=bt2020:color_trc=arib-std-b67,hwdownload,format=yuv420p10le",
+    "hwupload,libplacebo=iw:ih:format=yuv420p10le:format=rgb48le",
     "-c:v", "libx265",
+    "-x265-params", "open-gop=0:atc-sei=18:pic_struct=0",
     '-map_chapters', '-1',
     '-an',
     '-sn',
@@ -125,3 +125,4 @@ try:
 except subprocess.CalledProcessError as e:
     logger.error("Error executing FFmpeg:", e)
     logger.error("Error output:", e.stderr.decode())
+
